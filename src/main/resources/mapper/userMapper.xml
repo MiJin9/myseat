@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mycompany.myseat.dao.UserMapper">
+    <!--회원 가입-->
+    <insert id="insertUser" parameterType="User">
+        INSERT INTO ms_user (email, pw, name, nickname, register_date, grade, point, status)
+        VALUES (#{email}, #{pw}, #{name}, #{nickname}, now(), 0, 0, 0);
+    </insert>
+
+    <!--회원 검색-->
+    <select id="selectUser" parameterType="String" resultType="User">
+        SELECT email, pw, name, nickname, register_date, grade, point, status
+        FROM ms_user
+        WHERE email = #{email}
+    </select>
+
+    <!--아이디 중복 체크-->
+    <select id="emailCheck" parameterType="String" resultType="int">
+        SELECT COUNT(EMAIL)
+        FROM ms_user
+        WHERE email = #{email}
+    </select>
+
+    <!--닉네임 중복 체크-->
+    <select id="nicknameCheck" parameterType="String" resultType="int">
+        SELECT COUNT(EMAIL)
+        FROM ms_user
+        WHERE nickname = #{nickname}
+    </select>
+
+    <!--전체 회원 출력-->
+    <select id="selectAllUser" resultType="User">
+        SELECT email, pw, name, nickname, register_date, grade, point, status
+        FROM ms_user
+    </select>
+
+    <!--회원 상태 바꾸기-->
+    <update id="updateStatus" parameterType="String">
+        UPDATE ms_user
+        SET status = #{status}
+        WHERE email = #{email}
+    </update>
+
+    <!--회원 정보 수정-->
+    <update id="updateUser" parameterType="User">
+        UPDATE ms_user
+        SET name = #{name}, nickname = #{nickname}
+        WHERE email = #{email}
+    </update>
+</mapper>

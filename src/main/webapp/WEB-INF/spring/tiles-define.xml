@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+ 
+<tiles-definitions>
+	<!-- 메인 페이지 레이아웃 -->
+	<definition name="tiles-layout" template="/WEB-INF/views/tiles/tiles-layout.jsp">
+<!--		<put-attribute name="sidebar" value="" />-->
+		<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
+<!--		<put-attribute name="content" value="" />-->
+<!--		<put-attribute name="footer" value="" />-->
+	</definition>
+
+	<!-- tiles 적용 -->
+	<definition name="*.tiles" extends="tiles-layout">
+		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+	<definition name="*/*.tiles" extends="tiles-layout">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	<definition name="*/*/*.tiles" extends="tiles-layout">
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+	</definition>
+
+	<!-- tiles 미 적용 -->
+	<definition name="normal-layout" template="/WEB-INF/views/layout/NormalLayout.jsp">
+		<put-attribute name="normal" value="" />
+	</definition>
+	<definition name="*.jsp" extends="normal-layout">
+		<put-attribute name="normal" value="/WEB-INF/jsp/{1}.jsp" />
+	</definition>
+	<definition name="*/*.jsp" extends="normal-layout">
+		<put-attribute name="normal" value="/WEB-INF/jsp/{1}/{2}.jsp" />
+	</definition>
+	
+</tiles-definitions>
