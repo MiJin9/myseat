@@ -25,10 +25,10 @@
             top:60%;
             left:50%;
             transform: translate(-50%, -50%) ;
-            border: 1px solid rgb(89,117,196);
             border-radius: 10px;
         }
         input[type='text'], input[type='password'] {
+            background-color: white;
             width: 300px;
             height: 40px;
             border : 1px solid rgb(89,117,196);
@@ -44,16 +44,16 @@
             font-size: 17px;
             border : none;
             border-radius: 5px;
-            margin : 20px 0 30px 0;
+            margin : 10px 0 20px 0;
         }
         #title {
             font-size : 50px;
-            margin: 40px 0 30px 0;
+            margin: 20px 0 20px 0;
         }
         #msg {
-            height: 30px;
+            height: 20px;
             text-align:center;
-            font-size:16px;
+            font-size:13px;
             color:red;
             margin-bottom: 20px;
         }
@@ -73,9 +73,9 @@
     <input type="hidden" name="toURL" value="${param.toURL}">
     <button>로그인</button>
     <div>
-        <label><input type="checkbox" name="rememberId" value="on" ${empty cookie.email.value ? "":"checked"}> 아이디 기억</label> |
-        <a href="">비밀번호 찾기</a> |
-        <a href="/myseat/user/signUp">회원가입</a>
+        <label style="font-size: 13px"><input type="checkbox" name="rememberId" value="on" ${empty cookie.email.value ? "":"checked"}> 아이디 저장</label> |
+        <a href="" style="font-size: 13px">아이디/비밀번호 찾기</a> |
+        <a href="/myseat/user/signUp" style="font-size: 13px">회원가입</a>
     </div>
     <script>
         function formCheck(frm) {
