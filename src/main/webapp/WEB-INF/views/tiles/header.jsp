@@ -13,8 +13,8 @@
     <ul>
         <li id="logo">fastcampus</li>
         <li><a href="<c:url value='/'/>">Home</a></li>
-        <li><a href="<c:url value='/board/list'/>">좌석</a></li>
-        <li><a href="<c:url value='/board/list'/>">후기</a></li>
+        <li><a href="<c:url value='/place/map'/>">좌석</a></li>
+        <li><a href="<c:url value='/review/list'/>">후기</a></li>
         <li><a href="<c:url value='/user/login'/>">로그인</a></li>
         <li><a href="<c:url value='/user/signUp'/>">회원가입</a></li>
         <li><a href=""><i class="fa fa-search"></i></a></li>

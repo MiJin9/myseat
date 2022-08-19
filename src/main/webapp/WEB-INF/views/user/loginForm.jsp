@@ -10,54 +10,9 @@
 <head>
     <meta charset="UTF-8">
     <title>fastcampus</title>
-    <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
+    <link rel="stylesheet" href="<c:url value='/css/user.css'/>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
-    <style>
-        * { box-sizing:border-box; }
-        a { text-decoration: none; }
-        form {
-            width:400px;
-            height:500px;
-            display : flex;
-            flex-direction: column;
-            align-items:center;
-            position : absolute;
-            top:60%;
-            left:50%;
-            transform: translate(-50%, -50%) ;
-            border-radius: 10px;
-        }
-        input[type='text'], input[type='password'] {
-            background-color: white;
-            width: 300px;
-            height: 40px;
-            border : 1px solid rgb(89,117,196);
-            border-radius:5px;
-            padding: 0 10px;
-            margin-bottom: 10px;
-        }
-        button {
-            background-color: rgb(89,117,196);
-            color : white;
-            width:300px;
-            height:50px;
-            font-size: 17px;
-            border : none;
-            border-radius: 5px;
-            margin : 10px 0 20px 0;
-        }
-        #title {
-            font-size : 50px;
-            margin: 20px 0 20px 0;
-        }
-        #msg {
-            height: 20px;
-            text-align:center;
-            font-size:13px;
-            color:red;
-            margin-bottom: 20px;
-        }
-    </style>
+
 </head>
 <body>
 

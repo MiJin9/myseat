@@ -7,85 +7,50 @@
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>fastcampus</title>
-    <link rel="stylesheet" href="<c:url value='/css/menu.css'/>">
+    <link rel="stylesheet" href="<c:url value='/css/user.css'/>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
     <style>
-        * { box-sizing:border-box; }
-        a { text-decoration: none; }
-        form {
-            width:400px;
-            height:500px;
-            display : flex;
-            flex-direction: column;
-            align-items:center;
-            position : absolute;
-            top:60%;
-            left:50%;
-            transform: translate(-50%, -50%) ;
-            border: 1px solid rgb(89,117,196);
-            border-radius: 10px;
+        label{
+            font-size: 13px;
         }
-        input[type='text'], input[type='password'] {
-            width: 300px;
-            height: 38px;
-            border : 1px solid rgb(89,117,196);
-            border-radius:5px;
-            padding: 0 10px;
-            margin-bottom: 14px;
+        input[type='text'], input[type='password']{
+            display: flex;
+            margin-top: 7px;
         }
-
-        input[type='checkbox']{
-            margin-right: 5px;
-            vertical-align:-1px;
-        }
-
-        #signUpBtn {
-            background-color: rgb(89,117,196);
-            color : white;
-            width:300px;
-            height:50px;
-            font-size: 17px;
-            border : none;
-            border-radius: 5px;
-            margin : 20px 0 30px 0;
-        }
-
-        #title {
-            font-size : 50px;
-            margin: 30px 0 25px 0;
-        }
-
-        #terms{
-            font-size: 9px;
+        #title{
+            margin : 20px 0 35px 0;
         }
     </style>
 </head>
 <body>
 
 <form action="<c:url value="/user/signUp"/>" method="post">
-    <h3 id="title">회원 가입</h3>
+    <h3 id="title">회원가입</h3>
     <div>
-        <input type="text" name="email" id="email" placeholder="이메일" autofocus>
-        <input type="text" id="emailHidden" value="0">
+        <label>이메일</label>
+        <input type="text" name="email" id="email" placeholder="a@a.com" autofocus>
+        <input type="hidden" id="emailHidden" value="0">
         <span><p id="emailCheck" style="font-size: 12px"></p></span>
     </div>
 
     <div id="pwPlacepw">
-        <input type="password" name="pw" id="pw" placeholder="비밀번호">
+        <label>비밀번호</label>
+        <input type="password" name="pw" id="pw" placeholder="숫자와 영문을 포함, 8~15자리">
         <span><p id="pwText" style="font-size: 12px"></p></span>
     </div>
     <div id="pwPlace">
-        <input type="password" name="pwCheck" id="pwCheck" placeholder="비밀번호 확인">
+        <input type="password" name="pwCheck" id="pwCheck" style="margin-top: 0px" placeholder="비밀번호 재입력">
         <span><p id="pwCheckText" style="font-size: 12px"></p></span>
     </div>
-    <input type="text" name="name" id="name" placeholder="이름">
     <div>
+        <label>이름</label>
+        <input type="text" name="name" id="name" placeholder="이름">
+    </div>
+    <div>
+        <label>닉네임</label>
         <input type="text" name="nickname" id="nickname" placeholder="닉네임">
         <span><p id="nickCheckText" style="font-size: 12px"></p></span>
     </div>
-    <label id="terms">
-        <input type="checkbox" id="termsCheck">내자리에서 제공하는 서비스 약관에 동의합니다.
-    </label>
     <button id="signUpBtn">회원가입</button>
     <script>
         $("#pw").focusout(function(){
@@ -209,10 +174,10 @@
                 return false;
             }
 
-            if(!$("#termsCheck").is(":checked") == true){
-                alert("약관 동의를 해주세요.");
-                return false;
-            }
+            // if(!$("#termsCheck").is(":checked") == true){
+            //     alert("약관 동의를 해주세요.");
+            //     return false;
+            // }
         });
     </script>
 </form>
