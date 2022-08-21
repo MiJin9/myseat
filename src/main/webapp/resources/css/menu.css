@@ -23,7 +23,7 @@ ul {
     align-items: center;
 }
 
-#ul > li > a {
+#ul > li > .menuA {
     color: #30426E;
     margin:auto;
     padding: 5px;
@@ -32,7 +32,7 @@ ul {
     font-weight: bold;
 }
 
-ul > li > a:hover {
+ul > li > .menuA:hover {
     color :#be202c;
     border-bottom: 3px solid rgb(209, 209, 209);
 }

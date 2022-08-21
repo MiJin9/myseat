@@ -2,9 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@ page session="false"%>
-<c:set var="loginId" value="${pageContext.request.getSession(false)==null ? '' : pageContext.request.session.getAttribute('id')}"/>
-<c:set var="loginOutLink" value="${loginId=='' ? '/login/login' : '/login/logout'}"/>
-<c:set var="loginOut" value="${loginId=='' ? 'Login' : 'ID='+=loginId}"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,13 +21,15 @@
         </c:if>
     </div>
     <input type="text" name="email" value="${cookie.email.value}" placeholder="이메일 입력" autofocus>
-    <input type="password" name="pw" placeholder="비밀번호">
+    <input type="password" name="pw" placeholder="비밀번호" style="margin-bottom: 25px">
     <input type="hidden" name="toURL" value="${param.toURL}">
     <button>로그인</button>
-    <div>
-        <label style="font-size: 13px"><input type="checkbox" name="rememberId" value="on" ${empty cookie.email.value ? "":"checked"}> 아이디 저장</label> |
-        <a href="" style="font-size: 13px">아이디/비밀번호 찾기</a> |
-        <a href="/myseat/user/signUp" style="font-size: 13px">회원가입</a>
+    <div style="width: 100%;">
+        <label style="font-size: 13px; float: left; padding 0.3em"><input type="checkbox" name="rememberId" value="on" ${empty cookie.email.value ? "":"checked"}> 아이디 저장</label>
+        <div style="float: right">
+            <a href="/myseat/user/findUser" style="font-size: 13px">아이디/비밀번호 찾기</a> |
+            <a href="/myseat/user/signUp" style="font-size: 13px">회원가입</a>
+        </div>
     </div>
     <script>
         function formCheck(frm) {

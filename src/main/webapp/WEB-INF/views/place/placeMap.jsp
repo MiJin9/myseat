@@ -52,8 +52,8 @@
 <div id="search" style="margin-top: 30px">
     <input type="text" style="border: 1px solid #1b5ac2;" placeholder="원하는 위치 검색">
     <button>검색</button>
-    <button style="background-color: goldenrod">M</button>
-    <button>L</button>
+    <button style="border-left: 1px solid white;">Map</button>
+    <button style="border-left: 1px solid white;">List</button>
 </div>
 <div id="map" style="width:500px;height:400px; margin: auto"></div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${key}"></script>

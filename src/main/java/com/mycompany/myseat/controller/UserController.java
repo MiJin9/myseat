@@ -118,4 +118,10 @@ public class UserController {
     public int checkNickname(@RequestBody String nickname) throws Exception {
         return userService.getNicknameCheck(nickname);
     }
+
+    //아이디찾기
+    @GetMapping("/findUser")
+    public String findId(){
+        return "user/findIdPw.tiles";
+    }
 }

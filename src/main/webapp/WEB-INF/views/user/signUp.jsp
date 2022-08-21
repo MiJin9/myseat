@@ -20,33 +20,36 @@
         #title{
             margin : 20px 0 35px 0;
         }
+        .signUpDiv{
+            width: 100%;
+        }
     </style>
 </head>
 <body>
 
 <form action="<c:url value="/user/signUp"/>" method="post">
     <h3 id="title">회원가입</h3>
-    <div>
+    <div class="signUpDiv">
         <label>이메일</label>
         <input type="text" name="email" id="email" placeholder="a@a.com" autofocus>
         <input type="hidden" id="emailHidden" value="0">
         <span><p id="emailCheck" style="font-size: 12px"></p></span>
     </div>
 
-    <div id="pwPlacepw">
+    <div id="pwPlacepw" class="signUpDiv">
         <label>비밀번호</label>
         <input type="password" name="pw" id="pw" placeholder="숫자와 영문을 포함, 8~15자리">
         <span><p id="pwText" style="font-size: 12px"></p></span>
     </div>
-    <div id="pwPlace">
+    <div id="pwPlace" class="signUpDiv">
         <input type="password" name="pwCheck" id="pwCheck" style="margin-top: 0px" placeholder="비밀번호 재입력">
         <span><p id="pwCheckText" style="font-size: 12px"></p></span>
     </div>
-    <div>
+    <div class="signUpDiv">
         <label>이름</label>
         <input type="text" name="name" id="name" placeholder="이름">
     </div>
-    <div>
+    <div class="signUpDiv" style="margin-bottom: 25px">
         <label>닉네임</label>
         <input type="text" name="nickname" id="nickname" placeholder="닉네임">
         <span><p id="nickCheckText" style="font-size: 12px"></p></span>

@@ -12,12 +12,12 @@
 <div id="header">
     <ul id="ul">
         <li id="logo">fastcampus</li>
-        <li><a href="<c:url value='/'/>">Home</a></li>
-        <li><a href="<c:url value='/place/map'/>">극장</a></li>
-        <li><a href="<c:url value='/review/list'/>">후기</a></li>
-        <li><a href="<c:url value='/user/login'/>">로그인</a></li>
-        <li><a href="<c:url value='/user/signUp'/>">회원가입</a></li>
-        <li><a href=""><i class="fa fa-search"></i></a></li>
+        <li><a class="menuA" href="<c:url value='/'/>">Home</a></li>
+        <li><a class="menuA" href="<c:url value='/place/map'/>">극장</a></li>
+        <li><a class="menuA" href="<c:url value='/review/list'/>">후기</a></li>
+        <li><a class="menuA" href="<c:url value='/user/login'/>">로그인</a></li>
+        <li><a class="menuA" href="<c:url value='/user/signUp'/>">회원가입</a></li>
+        <li><a class="menuA" href=""><i class="fa fa-search"></i></a></li>
     </ul>
 </div>
 </body>
