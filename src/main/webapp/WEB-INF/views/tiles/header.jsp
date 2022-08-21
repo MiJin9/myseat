@@ -10,10 +10,10 @@
 </head>
 <body>
 <div id="header">
-    <ul>
+    <ul id="ul">
         <li id="logo">fastcampus</li>
         <li><a href="<c:url value='/'/>">Home</a></li>
-        <li><a href="<c:url value='/place/map'/>">좌석</a></li>
+        <li><a href="<c:url value='/place/map'/>">극장</a></li>
         <li><a href="<c:url value='/review/list'/>">후기</a></li>
         <li><a href="<c:url value='/user/login'/>">로그인</a></li>
         <li><a href="<c:url value='/user/signUp'/>">회원가입</a></li>

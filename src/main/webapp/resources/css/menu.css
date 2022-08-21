@@ -15,7 +15,7 @@ ul {
     display: flex;
 }
 
-ul > li {
+#ul > li {
     color: lightgray;
     height : 100%;
     width:90px;
@@ -23,7 +23,7 @@ ul > li {
     align-items: center;
 }
 
-ul > li > a {
+#ul > li > a {
     color: #30426E;
     margin:auto;
     padding: 5px;
