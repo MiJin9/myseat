@@ -31,4 +31,9 @@ public class UserDaoImpl implements UserDao {
     public int nicknameCheck(String nickname) throws Exception{
         return session.selectOne(namespace+"nicknameCheck", nickname);
     }
+
+    @Override
+    public String getNickName(String email) throws Exception{
+        return session.selectOne(namespace+"getNickName", email);
+    }
 }

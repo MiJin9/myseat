@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="search-container">
-            <form action="<c:url value="/board/list"/>" class="search-form" method="get">
+            <form action="<c:url value="/review/list"/>" class="search-form" method="get">
                 <select class="search-option" name="option">
                     <option value="A">제목+내용</option>
                     <option value="T">제목만</option>

@@ -9,6 +9,13 @@
         VALUES (#{email}, #{pw}, #{name}, #{nickname}, now(), 0, 0, 0);
     </insert>
 
+    <!--이메일로 닉네임 얻기-->
+    <select id="getNickName" parameterType="String" resultType="String">
+        SELECT nickname
+        FROM ms_user
+        WHERE email = #{email}
+    </select>
+
     <!--회원 검색-->
     <select id="selectUser" parameterType="String" resultType="User">
         SELECT email, pw, name, nickname, register_date, grade, point, status

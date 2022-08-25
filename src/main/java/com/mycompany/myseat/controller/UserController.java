@@ -64,6 +64,12 @@ public class UserController {
             HttpSession session = request.getSession();
             //1-2-1. 세션 객체에 id를 저장
             session.setAttribute("email", email);
+            try {
+                String nickname = userService.getNickName(email);
+                session.setAttribute("nickname", nickname);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         if (rememberId) {
@@ -96,7 +102,7 @@ public class UserController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "/index";
+        return "/index.tiles";
     }
 
 //    아이디 중복체크

@@ -26,7 +26,7 @@
             line-height: 46px;
             border-bottom: 2px solid #000;
         }
-        ul{
+        #findUl{
             margin-top: 30px;
             text-align: center;
         }
@@ -54,7 +54,7 @@
 <form action="<c:url value="/user/findUser"/>" method="post">
     <div>
         <h4>계정찾기</h4>
-        <ul>
+        <ul id="findUl">
             <li class="findLi"><a href="">아이디</a></li>
             <li class="findLi"><a href="">비밀번호</a></li>
         </ul>

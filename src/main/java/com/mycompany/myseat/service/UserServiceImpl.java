@@ -29,4 +29,9 @@ public class UserServiceImpl implements UserService {
     public int getNicknameCheck(String nickname) throws Exception{
         return userDao.nicknameCheck(nickname);
     }
+
+    @Override
+    public String getNickName(String email) throws Exception{
+        return userDao.getNickName(email);
+    }
 }

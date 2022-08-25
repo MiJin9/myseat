@@ -10,4 +10,6 @@ public interface UserService {
     int getEmailCheck(String email) throws Exception;
 
     int getNicknameCheck(String nickname) throws Exception;
+
+    String getNickName(String email) throws Exception;
 }
