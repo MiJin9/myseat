@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ page session="true" %>
-<c:set var="loginEmail" value="${sessionScope.email}"/>
+<%--<c:set var="loginEmail" value="${sessionScope.email}"/>--%>
 <c:set var="loginNickname" value="${sessionScope.nickname}"/>
 <!DOCTYPE html>
 <html>
@@ -25,19 +25,18 @@
 <div class="container">
     <h2 class="writing-header">게시판 ${mode=="new" ? "글쓰기" : "읽기"}</h2>
     <form id="form" class="form" action="" method="" style="margin-top: 10px">
-<%--        <input type="text" id="bno" name="bno" value="${reviewDto.bno}">--%>
-<%--        <input type="text" id="nickname" name="nickname" value="${sessionScope.nickname}">--%>
+        <input type="hidden" name="bno" value="${reviewDto.bno}">
         <c:if test="${mode eq 'new'}">
-        <select name="type" id="type" style="margin-bottom: 5px; background-color: #f8f8f8">
+        <select name="sort" id="sort" style="margin-bottom: 5px; background-color: #f8f8f8">
             <option value="0">--카테고리를 선택해주세요--</option>
             <option value="1">영화</option>
             <option value="2">공연</option>
         </select>
         </c:if>
         <c:if test="${mode ne 'new'}">
-            <input type="text" value="${reviewDto.type}">
+            <input type="text" value="${reviewDto.sort=="1" ? "영화" : "공연"}">
         </c:if>
-        <input name="title" id="title" type="text" placeholder="  제목을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}><br>
+        <input name="title" id="title" type="text" placeholder="  제목을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"} value="<c:out value='${reviewDto.title}'/>"><br>
         <textarea name="content" rows="20" id="content"
                   placeholder=" 내용을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"}>${reviewDto.content}</textarea><br>
 
@@ -47,7 +46,7 @@
         <c:if test="${mode ne 'new'}">
         <button type="button" id="writeNewBtn" class="btn btn-write"><i class="fa fa-pencil"></i> 글쓰기</button>
         </c:if>
-        <c:if test="${reviewDto.email eq loginEmail}">
+        <c:if test="${reviewDto.nickname eq loginNickname}">
             <button type="button" id="modifyBtn" class="btn btn-modify"><i class="fa fa-edit"></i> 수정</button>
             <button type="button" id="removeBtn" class="btn btn-remove"><i class="fa fa-trash"></i> 삭제</button>
         </c:if>
@@ -62,7 +61,7 @@
         let formCheck = function () {
             let title = document.getElementById("title");
             let content = document.getElementById("content");
-            let type = document.getElementById("type");
+            let sort = document.getElementById("sort");
             if (title.value == "") {
                 alert("제목을 입력해주세요.");
                 title.focus();
@@ -73,9 +72,9 @@
                 content.focus();
                 return false;
             }
-            if (type.value == "0") {
+            if (sort.value == "0") {
                 alert("카테고리를 선택해주세요.");
-                type.focus();
+                sort.focus();
                 return false;
             }
             return true;

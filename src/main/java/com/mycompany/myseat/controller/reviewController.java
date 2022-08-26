@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/review")
@@ -20,10 +21,19 @@ public class reviewController {
     @Autowired
     ReviewService reviewService;
 
+    //글목록
     @GetMapping("/list")
-    public String goList(HttpServletRequest request){
+    public String goList(HttpServletRequest request, Model m){
         if(!loginCheck(request))
             return "redirect:/user/login.tiles";
+
+        try {
+            List<ReviewDto> list = reviewService.list();
+            m.addAttribute("list", list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return "review/reviewList.tiles";
     }
 
@@ -32,6 +42,7 @@ public class reviewController {
         return session.getAttribute("nickname")!=null;
     }
 
+    //글쓰기
     @GetMapping("/write")
     public String writeReview(Model m){
         m.addAttribute("mode", "new");
@@ -55,5 +66,17 @@ public class reviewController {
             m.addAttribute(reviewDto);
             return "review/review.tiles";
         }
+    }
+
+    //글읽기
+    @GetMapping("/read")
+    public String readReview(Integer bno, Model m){
+        try {
+            ReviewDto reviewDto = reviewService.read(bno);
+            m.addAttribute("reviewDto", reviewDto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "review/review.tiles";
     }
 }

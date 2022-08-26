@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class ReviewDaoImpl implements ReviewDao {
     @Autowired
@@ -15,5 +17,15 @@ public class ReviewDaoImpl implements ReviewDao {
     @Override
     public int insert(ReviewDto reviewDto) throws Exception{
         return session.insert(namespace+"insert", reviewDto);
+    }
+
+    @Override
+    public List<ReviewDto> selectAll() throws Exception{
+        return session.selectList(namespace+"selectAll");
+    }
+
+    @Override
+    public ReviewDto select(Integer bno) throws Exception{
+        return session.selectOne(namespace+"select", bno);
     }
 }

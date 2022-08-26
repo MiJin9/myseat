@@ -31,13 +31,16 @@
                 <th class="regdate">등록일</th>
                 <th class="viewcnt">조회수</th>
             </tr>
+            <c:forEach var="reviewDto" items="${list}">
                 <tr>
-                    <td class="no"></td>
-                    <td class="title"><a></a></td>
-                    <td class="writer"></td>
-                    <td class="regdate"></td>
-                    <td class="viewcnt"></td>
+                    <td class="no">${reviewDto.bno}</td>
+<%--                    <td class="title">${reviewDto.title}</td>--%>
+                    <td class="title"><a href="<c:url value="/review/read?bno=${reviewDto.bno}"/>"><c:out value="${reviewDto.title}"/></a></td>
+                    <td class="writer">${reviewDto.nickname}</td>
+                    <td class="regdate"><fmt:formatDate pattern="yy-MM-dd" value="${reviewDto.reg_date}" type="date"/></td>
+                    <td class="viewcnt">${reviewDto.view_cnt}</td>
                 </tr>
+            </c:forEach>
         </table>
         <br>
         <div class="paging-container">

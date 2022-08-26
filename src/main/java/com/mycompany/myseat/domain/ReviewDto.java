@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class ReviewDto {
-    private int bno;
+    private Integer bno;
     private String title;
     private String content;
     private String nickname;
@@ -12,13 +12,13 @@ public class ReviewDto {
     private int comment_cnt;
     private Date reg_date;
     private Date up_date;
-    private int type;
+    private int sort;
 
-    public int getBno() {
+    public Integer getBno() {
         return bno;
     }
 
-    public void setBno(int bno) {
+    public void setBno(Integer bno) {
         this.bno = bno;
     }
 
@@ -78,21 +78,21 @@ public class ReviewDto {
         this.up_date = up_date;
     }
 
-    public int getType() {
-        return type;
+    public int getSort() {
+        return sort;
     }
 
-    public void setType(int type) {
-        this.type = type;
+    public void setSort(int sort) {
+        this.sort = sort;
     }
 
     public ReviewDto(){ this("", "", "", 0);}
 
-    public ReviewDto(String title, String content, String nickname, int type) {
+    public ReviewDto(String title, String content, String nickname, int sort) {
         this.title = title;
         this.content = content;
         this.nickname = nickname;
-        this.type = type;
+        this.sort = sort;
     }
 
     @Override
@@ -100,12 +100,12 @@ public class ReviewDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ReviewDto reviewDto = (ReviewDto) o;
-        return bno == reviewDto.bno && type == reviewDto.type && Objects.equals(title, reviewDto.title) && Objects.equals(content, reviewDto.content) && Objects.equals(nickname, reviewDto.nickname);
+        return bno == reviewDto.bno && sort == reviewDto.sort && Objects.equals(title, reviewDto.title) && Objects.equals(content, reviewDto.content) && Objects.equals(nickname, reviewDto.nickname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bno, title, content, nickname, type);
+        return Objects.hash(bno, title, content, nickname, sort);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class ReviewDto {
                 ", comment_cnt=" + comment_cnt +
                 ", reg_date=" + reg_date +
                 ", up_date=" + up_date +
-                ", type=" + type +
+                ", sort=" + sort +
                 '}';
     }
 

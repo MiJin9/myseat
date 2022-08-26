@@ -5,7 +5,22 @@
 <mapper namespace="com.mycompany.myseat.dao.ReviewMapper">
     <!--게시글 작성-->
     <insert id="insert" parameterType="ReviewDto">
-        insert into ms_board(title, content, nickname, type)
-        values (#{title}, #{content}, #{nickname}, #{type});
+        insert into ms_board(title, content, nickname, sort)
+        values (#{title}, #{content}, #{nickname}, #{sort})
     </insert>
+
+    <!--게시글 목록-->
+    <select id="selectAll" resultType="ReviewDto">
+        select bno, title, content, sort, nickname, reg_date, view_cnt
+        from ms_board
+        order by reg_date DESC, bno DESC
+    </select>
+
+    <!--게시글 보기-->
+    <select id="select" parameterType="Integer" resultType="ReviewDto">
+        select bno, title, content, sort, nickname, reg_date, view_cnt
+        from ms_board
+        where bno = #{bno}
+        order by reg_date DESC, bno DESC
+    </select>
 </mapper>

@@ -5,6 +5,8 @@ import com.mycompany.myseat.domain.ReviewDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReviewServiceImpl implements ReviewService {
     @Autowired
@@ -13,5 +15,15 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public int write(ReviewDto reviewDto) throws Exception{
         return reviewDao.insert(reviewDto);
+    }
+
+    @Override
+    public List<ReviewDto> list() throws Exception{
+        return reviewDao.selectAll();
+    }
+
+    @Override
+    public ReviewDto read(Integer bno) throws Exception{
+        return reviewDao.select(bno);
     }
 }
