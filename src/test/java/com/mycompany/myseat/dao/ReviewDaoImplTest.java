@@ -21,8 +21,9 @@ public class ReviewDaoImplTest {
 
     @Test
     public void insert() throws Exception{
-        for(int i=1; i<=20; i++){
-//            ReviewDto
+        for(int i=1; i<=123; i++){
+            ReviewDto reviewDto = new ReviewDto("title"+i, "content"+i, "kk", 2);
+            reviewDao.insert(reviewDto);
         }
     }
 

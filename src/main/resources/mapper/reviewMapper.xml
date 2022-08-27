@@ -37,4 +37,18 @@
         from ms_board
         where bno = #{bno} and nickname = #{nickname}
     </delete>
+
+    <!--페이징-->
+    <select id="selectPage" parameterType="map" resultType="ReviewDto">
+        select bno, title, content, sort, nickname, reg_date, view_cnt
+        from ms_board
+        order by reg_date DESC, bno DESC
+        limit #{offset}, #{pageSize}
+    </select>
+
+    <!--전체 글 개수 구하기-->
+    <select id="count" resultType="int">
+        select count(*)
+        from ms_board
+    </select>
 </mapper>

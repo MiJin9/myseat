@@ -43,4 +43,14 @@ public class ReviewDaoImpl implements ReviewDao {
         map.put("nickname", nickname);
         return session.delete(namespace+"delete", map);
     }
+
+    @Override
+    public List<ReviewDto> selectPage(Map map) throws Exception{
+        return session.selectList(namespace+"selectPage", map);
+    }
+
+    @Override
+    public int count() throws Exception{
+        return session.selectOne(namespace+"count");
+    }
 }

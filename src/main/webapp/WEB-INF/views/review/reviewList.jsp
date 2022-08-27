@@ -34,8 +34,7 @@
             <c:forEach var="reviewDto" items="${list}">
                 <tr>
                     <td class="no">${reviewDto.bno}</td>
-<%--                    <td class="title">${reviewDto.title}</td>--%>
-                    <td class="title"><a href="<c:url value="/review/read?bno=${reviewDto.bno}"/>"><c:out value="${reviewDto.title}"/></a></td>
+                    <td class="title"><a href="<c:url value="/review/read?bno=${reviewDto.bno}&page=${page}&pageSize=${pageSize}"/>"><c:out value="${reviewDto.title}"/></a></td>
                     <td class="writer">${reviewDto.nickname}</td>
                     <td class="regdate"><fmt:formatDate pattern="yy-MM-dd" value="${reviewDto.reg_date}" type="date"/></td>
                     <td class="viewcnt">${reviewDto.view_cnt}</td>
@@ -45,7 +44,15 @@
         <br>
         <div class="paging-container">
             <div class="paging">
-
+                <c:if test="${ph.showPre}">
+                    <a href="<c:url value='/review/list?page=${ph.beginPage-1}&pageSize=${ph.pageSize}'/>">&lt;</a>
+                </c:if>
+                <c:forEach var="i" begin="${ph.beginPage}" end="${ph.endPage}">
+                    <a href="<c:url value='/review/list?page=${i}&pageSize=${ph.pageSize}'/>">${i}</a>
+                </c:forEach>
+                <c:if test="${ph.showNext}">
+                    <a href="<c:url value='/review/list?page=${ph.endPage+1}&pageSize=${ph.pageSize}'/>">&gt;</a>
+                </c:if>
             </div>
         </div>
         <div class="search-container">

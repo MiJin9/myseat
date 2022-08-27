@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -35,5 +36,15 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public int remove(Integer bno, String nickname) throws Exception{
         return reviewDao.delete(bno, nickname);
+    }
+
+    @Override
+    public List<ReviewDto> getPage(Map map) throws Exception{
+        return reviewDao.selectPage(map);
+    }
+
+    @Override
+    public int getTotalCnt() throws Exception{
+        return reviewDao.count();
     }
 }

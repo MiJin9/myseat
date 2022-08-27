@@ -108,6 +108,9 @@
             form.attr("method", "post");
             form.submit();
         });
+        $("#listBtn").on("click", function (){
+            location.href="<c:url value='/review/list'/>?page=${page}&pageSize=${pageSize}";
+        })
     });
 </script>
 </body>

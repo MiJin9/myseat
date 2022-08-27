@@ -1,5 +1,6 @@
 package com.mycompany.myseat.controller;
 
+import com.mycompany.myseat.domain.PageHandler;
 import com.mycompany.myseat.domain.ReviewDto;
 import com.mycompany.myseat.service.ReviewService;
 import org.apache.ibatis.annotations.Update;
@@ -11,7 +12,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/review")
@@ -22,13 +25,25 @@ public class reviewController {
 
     //글목록
     @GetMapping("/list")
-    public String goList(HttpServletRequest request, Model m){
+    public String goList(Integer page, Integer pageSize, HttpServletRequest request, Model m){
         if(!loginCheck(request))
             return "redirect:/user/login.tiles";
 
+        if(page==null) page=1;
+        if(pageSize==null) pageSize=10;
+
         try {
-            List<ReviewDto> list = reviewService.list();
+            int totalCnt = reviewService.getTotalCnt();
+            PageHandler pageHandler = new PageHandler(totalCnt, page, pageSize);
+
+            Map map = new HashMap();
+            map.put("offset", (page-1)*pageSize);
+            map.put("pageSize", pageSize);
+            List<ReviewDto> list = reviewService.getPage(map);
             m.addAttribute("list", list);
+            m.addAttribute("ph", pageHandler);
+            m.addAttribute("page", page);
+            m.addAttribute("pageSize", pageSize);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -69,10 +84,12 @@ public class reviewController {
 
     //글 읽기
     @GetMapping("/read")
-    public String readReview(Integer bno, Model m){
+    public String readReview(Integer bno, Model m, Integer page, Integer pageSize){
         try {
             ReviewDto reviewDto = reviewService.read(bno);
             m.addAttribute("reviewDto", reviewDto);
+            m.addAttribute("page", page);
+            m.addAttribute("pageSize", pageSize);
         } catch (Exception e) {
             e.printStackTrace();
         }
