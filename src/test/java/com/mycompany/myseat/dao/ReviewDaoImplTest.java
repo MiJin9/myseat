@@ -44,4 +44,16 @@ public class ReviewDaoImplTest {
         ReviewDto reviewDto2 = reviewDao.select(bno);
         assertTrue(reviewDto.equals(reviewDto2));
     }
+
+    @Test
+    public void update() throws Exception{
+        ReviewDto reviewDto = new ReviewDto("test", "test", "kk", 1);
+        assertTrue(reviewDao.insert(reviewDto)==1);
+
+        Integer bno = reviewDao.selectAll().get(0).getBno();
+        reviewDto.setBno(bno);
+        reviewDto.setTitle("change");
+        System.out.println("reviewDto = " + reviewDto);
+        assertTrue(reviewDao.update(reviewDto)==1);
+    }
 }

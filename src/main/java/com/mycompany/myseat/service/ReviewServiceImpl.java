@@ -26,4 +26,9 @@ public class ReviewServiceImpl implements ReviewService {
     public ReviewDto read(Integer bno) throws Exception{
         return reviewDao.select(bno);
     }
+
+    @Override
+    public int modify(ReviewDto reviewDto) throws Exception{
+        return reviewDao.update(reviewDto);
+    }
 }

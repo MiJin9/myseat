@@ -23,4 +23,11 @@
         where bno = #{bno}
         order by reg_date DESC, bno DESC
     </select>
+
+    <!--게시글 수정-->
+    <update id="update" parameterType="ReviewDto">
+        update ms_board
+        set title = #{title}, content = #{content}, sort = #{sort}, up_date = now()
+        where bno = #{bno} and nickname = #{nickname}
+    </update>
 </mapper>

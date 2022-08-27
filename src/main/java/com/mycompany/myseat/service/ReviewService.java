@@ -10,4 +10,6 @@ public interface ReviewService {
     List<ReviewDto> list() throws Exception;
 
     ReviewDto read(Integer bno) throws Exception;
+
+    int modify(ReviewDto reviewDto) throws Exception;
 }

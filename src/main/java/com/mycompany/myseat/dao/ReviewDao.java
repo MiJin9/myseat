@@ -10,4 +10,6 @@ public interface ReviewDao {
     List<ReviewDto> selectAll() throws Exception;
 
     ReviewDto select(Integer bno) throws Exception;
+
+    int update(ReviewDto reviewDto) throws Exception;
 }

@@ -23,7 +23,7 @@
     if (msg == "WRT_ERR") alert("게시물 등록에 실패하였습니다. 다시 시도해주세요.");
 </script>
 <div class="container">
-    <h2 class="writing-header">게시판 ${mode=="new" ? "글쓰기" : "읽기"}</h2>
+    <h2 class="writing-header">리뷰 ${mode=="new" ? "쓰기" : "읽기"}</h2>
     <form id="form" class="form" action="" method="" style="margin-top: 10px">
         <input type="hidden" name="bno" value="${reviewDto.bno}">
         <c:if test="${mode eq 'new'}">
@@ -34,7 +34,7 @@
         </select>
         </c:if>
         <c:if test="${mode ne 'new'}">
-            <input type="text" value="${reviewDto.sort=="1" ? "영화" : "공연"}">
+            <input type="text" value="${reviewDto.sort=="1" ? "영화" : "공연"}" readonly>
         </c:if>
         <input name="title" id="title" type="text" placeholder="  제목을 입력해 주세요." ${mode=="new" ? "" : "readonly='readonly'"} value="<c:out value='${reviewDto.title}'/>"><br>
         <textarea name="content" rows="20" id="content"
@@ -85,6 +85,20 @@
             form.attr("method", "post");
             if (formCheck())
                 form.submit();
+        });
+        $("#modifyBtn").on("click", function (){
+            let form = $("#form");
+            let isReadonly = $("input[name=title]").attr('readonly');
+            if(isReadonly=='readonly'){
+                $("input[name=title]").attr('readonly', false);
+                $("textarea").attr('readonly', false);
+                $(".writing-header").html("리뷰 수정");
+                $("#modifyBtn").html("<i class='fa fa-edit'></i>등록");
+                return;
+            }
+            form.attr("action", "<c:url value='/review/modify'/>");
+            form.attr("method", "post");
+            form.submit();
         });
     });
 </script>

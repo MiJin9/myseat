@@ -28,4 +28,9 @@ public class ReviewDaoImpl implements ReviewDao {
     public ReviewDto select(Integer bno) throws Exception{
         return session.selectOne(namespace+"select", bno);
     }
+
+    @Override
+    public int update(ReviewDto reviewDto) throws Exception{
+        return session.update(namespace+"update", reviewDto);
+    }
 }
