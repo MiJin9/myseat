@@ -12,4 +12,6 @@ public interface ReviewDao {
     ReviewDto select(Integer bno) throws Exception;
 
     int update(ReviewDto reviewDto) throws Exception;
+
+    int delete(Integer bno, String nickname) throws Exception;
 }

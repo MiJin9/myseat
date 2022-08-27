@@ -97,4 +97,20 @@ public class reviewController {
             return "review/review.tiles";
         }
     }
+
+    //글 삭제
+    @PostMapping("/remove")
+    public String removeReview(Integer bno, HttpSession session, RedirectAttributes rattr, Model m){
+        String nickname = (String)session.getAttribute("nickname");
+        try {
+            if(reviewService.remove(bno, nickname)!=1)
+                throw new Exception("Remove failed");
+
+            rattr.addFlashAttribute("msg", "DEL_OK");
+        } catch (Exception e) {
+            e.printStackTrace();
+            m.addAttribute("msg", "DEL_ERR");
+        }
+        return "redirect:/review/list.tiles";
+    }
 }

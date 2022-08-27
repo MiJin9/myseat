@@ -20,7 +20,8 @@
 <body>
 <script>
     let msg = "${msg}";
-    if (msg == "WRT_ERR") alert("게시물 등록에 실패하였습니다. 다시 시도해주세요.");
+    if(msg=="WRT_ERR") alert("게시물 등록에 실패하였습니다. 다시 시도해 주세요.");
+    if(msg=="MOD_ERR") alert("게시물 수정에 실패하였습니다. 다시 시도해 주세요.");
 </script>
 <div class="container">
     <h2 class="writing-header">리뷰 ${mode=="new" ? "쓰기" : "읽기"}</h2>
@@ -97,6 +98,13 @@
                 return;
             }
             form.attr("action", "<c:url value='/review/modify'/>");
+            form.attr("method", "post");
+            form.submit();
+        });
+        $("#removeBtn").on("click", function (){
+            let form = $("#form");
+            if(!confirm("정말로 삭제하시겠습니까?")) return;
+            form.attr("action", "<c:url value='/review/remove'/>");
             form.attr("method", "post");
             form.submit();
         });

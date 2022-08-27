@@ -21,9 +21,9 @@ public class ReviewDaoImplTest {
 
     @Test
     public void insert() throws Exception{
-        ReviewDto reviewDto = new ReviewDto("title3", "content3", "asdf", 0);
-        System.out.println("ReviewDto = " + reviewDto);
-        assertTrue(reviewDao.insert(reviewDto)==1);
+        for(int i=1; i<=20; i++){
+//            ReviewDto
+        }
     }
 
     @Test
@@ -55,5 +55,13 @@ public class ReviewDaoImplTest {
         reviewDto.setTitle("change");
         System.out.println("reviewDto = " + reviewDto);
         assertTrue(reviewDao.update(reviewDto)==1);
+    }
+
+    @Test
+    public void delete() throws Exception{
+        ReviewDto reviewDto = new ReviewDto("title", "content", "kk", 2);
+        assertTrue(reviewDao.insert(reviewDto)==1);
+
+        assertTrue(reviewDao.delete(47, "kk")==1);
     }
 }

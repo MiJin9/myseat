@@ -12,4 +12,6 @@ public interface ReviewService {
     ReviewDto read(Integer bno) throws Exception;
 
     int modify(ReviewDto reviewDto) throws Exception;
+
+    int remove(Integer bno, String nickname) throws Exception;
 }

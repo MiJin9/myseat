@@ -30,4 +30,11 @@
         set title = #{title}, content = #{content}, sort = #{sort}, up_date = now()
         where bno = #{bno} and nickname = #{nickname}
     </update>
+
+    <!--게시글 삭제-->
+    <delete id="delete" parameterType="map">
+        delete
+        from ms_board
+        where bno = #{bno} and nickname = #{nickname}
+    </delete>
 </mapper>
