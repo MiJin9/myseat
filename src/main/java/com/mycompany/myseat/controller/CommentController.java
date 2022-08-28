@@ -65,4 +65,22 @@ public class CommentController {
             return new ResponseEntity<>("DEL_ERR", HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PatchMapping("/comments/{cno}")
+    public ResponseEntity<String> modify(@PathVariable int cno, @RequestBody CommentDto commentDto, HttpSession session){
+//        String commenter = (String) session.getAttribute("nickname");
+        String commenter = "kk";
+        commentDto.setCommenter(commenter);
+        commentDto.setCno(cno);
+        try {
+            int rowCnt = commentService.modify(commentDto);
+            if(rowCnt!=1)
+                throw new Exception("Modify failed");
+
+            return new ResponseEntity<>("MOD_OK", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("MOD_ERR", HttpStatus.BAD_REQUEST);
+        }
+    }
 }

@@ -15,4 +15,6 @@ public interface CommentService {
 
     @Transactional(rollbackFor = Exception.class)
     int remove(String commenter, int cno, Integer bno) throws Exception;
+
+    int modify(CommentDto commentDto) throws Exception;
 }

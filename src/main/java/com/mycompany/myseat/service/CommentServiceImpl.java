@@ -44,4 +44,9 @@ public class CommentServiceImpl implements CommentService {
         reviewDao.updateCommentCnt(bno, -1);
         return commentDao.delete(cno, commenter);
     }
+
+    @Override
+    public int modify(CommentDto commentDto) throws Exception{
+        return commentDao.update(commentDto);
+    }
 }

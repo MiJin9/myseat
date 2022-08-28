@@ -38,4 +38,9 @@ public class CommentDaoImpl implements CommentDao {
         map.put("commenter", commenter);
         return session.delete(namespace+"delete", map);
     }
+
+    @Override
+    public int update(CommentDto commentDto) throws Exception{
+        return session.update(namespace+"update", commentDto);
+    }
 }

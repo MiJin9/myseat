@@ -32,4 +32,11 @@
         from ms_comment
         where cno = #{cno} and commenter = #{commenter};
     </delete>
+    
+    <!--댓글 수정-->
+    <update id="update" parameterType="CommentDto">
+        update ms_comment
+        set comment = #{comment}, up_date = now()
+        where cno = #{cno} and commenter = #{commenter};
+    </update>
 </mapper>
