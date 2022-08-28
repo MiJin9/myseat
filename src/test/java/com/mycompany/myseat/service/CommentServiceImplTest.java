@@ -33,7 +33,5 @@ public class CommentServiceImplTest {
 
         assertTrue(reviewDao.select(bno).getComment_cnt()==0);
         assertTrue(commentService.write(commentDto)==1);
-
-
     }
 }

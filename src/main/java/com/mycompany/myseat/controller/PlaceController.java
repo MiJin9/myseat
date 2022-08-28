@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/place")
-public class placeController {
+public class PlaceController {
 
 
     @Value("#{props['mapKey']}")

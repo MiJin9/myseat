@@ -3,7 +3,6 @@ package com.mycompany.myseat.controller;
 import com.mycompany.myseat.domain.PageHandler;
 import com.mycompany.myseat.domain.ReviewDto;
 import com.mycompany.myseat.service.ReviewService;
-import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +17,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/review")
-public class reviewController {
+public class ReviewController {
 
     @Autowired
     ReviewService reviewService;

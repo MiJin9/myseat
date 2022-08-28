@@ -10,4 +10,19 @@
         VALUES
             (#{bno}, #{pcno}, #{comment}, #{commenter}, now(), now())
     </insert>
+
+    <!--댓글 보기-->
+    <select id="select" parameterType="int" resultType="CommentDto">
+        select cno, bno, pcno, comment, commenter, reg_date, up_date
+        from ms_comment
+        where cno = #{cno}
+    </select>
+
+    <!--댓글 전체 보기-->
+    <select id="selectAll" parameterType="int" resultType="CommentDto">
+        select cno, bno, pcno, comment, commenter, reg_date, up_date
+        from ms_comment
+        where bno = #{bno}
+        order by reg_date ASC, cno ASC
+    </select>
 </mapper>
