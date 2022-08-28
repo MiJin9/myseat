@@ -25,4 +25,11 @@
         where bno = #{bno}
         order by reg_date ASC, cno ASC
     </select>
+
+    <!--댓글 삭제-->
+    <delete id="delete" parameterType="map">
+        delete
+        from ms_comment
+        where cno = #{cno} and commenter = #{commenter};
+    </delete>
 </mapper>

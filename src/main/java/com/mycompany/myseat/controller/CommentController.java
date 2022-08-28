@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -33,10 +31,13 @@ public class CommentController {
         }
     }
 
+    @ResponseBody
     @PostMapping("/comments")
-    public ResponseEntity<String> write(CommentDto commentDto, HttpSession session) throws Exception{
+    public ResponseEntity<String> write(@RequestBody CommentDto commentDto, Integer bno, HttpSession session) throws Exception{
 //        String commenter = (String) session.getAttribute("nickname");
-        String commenter = "asdf";
+        String commenter = "kk";
+        commentDto.setCommenter(commenter);
+        commentDto.setBno(bno);
         try {
             int rowCnt = commentService.write(commentDto);
             if(rowCnt!=1)
@@ -46,6 +47,22 @@ public class CommentController {
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>("WRT_ERR", HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("/comments/{cno}")
+    public ResponseEntity<String> remove(@PathVariable int cno, Integer bno, HttpSession session) throws Exception{
+//        String commenter = (String) session.getAttribute("nickname");
+        String commenter = "asdf";
+        try {
+            int rowCnt = commentService.remove(commenter, cno, bno);
+            if(rowCnt!=1)
+                throw new Exception("Delete failed");
+
+            return new ResponseEntity<>("DEL_OK", HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("DEL_ERR", HttpStatus.BAD_REQUEST);
         }
     }
 }

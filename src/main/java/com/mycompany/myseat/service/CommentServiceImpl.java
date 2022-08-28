@@ -38,4 +38,10 @@ public class CommentServiceImpl implements CommentService {
         return commentDao.selectAll(bno);
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int remove(String commenter, int cno, Integer bno) throws Exception{
+        reviewDao.updateCommentCnt(bno, -1);
+        return commentDao.delete(cno, commenter);
+    }
 }

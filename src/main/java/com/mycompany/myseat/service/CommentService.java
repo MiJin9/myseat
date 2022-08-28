@@ -12,4 +12,7 @@ public interface CommentService {
     CommentDto read(int cno) throws Exception;
 
     List<CommentDto> getList(Integer bno) throws Exception;
+
+    @Transactional(rollbackFor = Exception.class)
+    int remove(String commenter, int cno, Integer bno) throws Exception;
 }
