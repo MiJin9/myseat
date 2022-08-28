@@ -19,4 +19,6 @@ public interface ReviewDao {
     List<ReviewDto> selectPage(Map map) throws Exception;
 
     int count() throws Exception;
+
+    int updateCommentCnt(Integer bno, int cnt) throws Exception;
 }

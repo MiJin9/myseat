@@ -53,4 +53,12 @@ public class ReviewDaoImpl implements ReviewDao {
     public int count() throws Exception{
         return session.selectOne(namespace+"count");
     }
+
+    @Override
+    public int updateCommentCnt(Integer bno, int cnt) throws Exception{
+        Map map = new HashMap();
+        map.put("bno", bno);
+        map.put("cnt", cnt);
+        return session.update(namespace+"updateCommentCnt", map);
+    }
 }

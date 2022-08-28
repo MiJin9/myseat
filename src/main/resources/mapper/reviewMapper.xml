@@ -51,4 +51,11 @@
         select count(*)
         from ms_board
     </select>
+
+    <!--댓글 갯수 증가-->
+    <update id="updateCommentCnt" parameterType="map">
+        update ms_board
+        set comment_cnt = comment_cnt + #{cnt}
+        where bno = #{bno}
+    </update>
 </mapper>
