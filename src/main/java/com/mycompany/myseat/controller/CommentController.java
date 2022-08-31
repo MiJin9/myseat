@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-@Controller
+//@Controller
+//@ResponseBody
+@RestController
 public class CommentController {
 
     @Autowired
@@ -21,7 +23,6 @@ public class CommentController {
     @ResponseBody
     public ResponseEntity<List<CommentDto>> list(Integer bno) throws Exception{
         List<CommentDto> list = null;
-
         try {
             list = commentService.getList(bno);
             return new ResponseEntity<List<CommentDto>>(list, HttpStatus.OK);
@@ -31,11 +32,10 @@ public class CommentController {
         }
     }
 
-    @ResponseBody
     @PostMapping("/comments")
     public ResponseEntity<String> write(@RequestBody CommentDto commentDto, Integer bno, HttpSession session) throws Exception{
-//        String commenter = (String) session.getAttribute("nickname");
-        String commenter = "kk";
+        String commenter = (String) session.getAttribute("nickname");
+//        String commenter = "kk";
         commentDto.setCommenter(commenter);
         commentDto.setBno(bno);
         try {
@@ -52,8 +52,8 @@ public class CommentController {
 
     @DeleteMapping("/comments/{cno}")
     public ResponseEntity<String> remove(@PathVariable int cno, Integer bno, HttpSession session) throws Exception{
-//        String commenter = (String) session.getAttribute("nickname");
-        String commenter = "asdf";
+        String commenter = (String) session.getAttribute("nickname");
+//        String commenter = "asdf";
         try {
             int rowCnt = commentService.remove(commenter, cno, bno);
             if(rowCnt!=1)
