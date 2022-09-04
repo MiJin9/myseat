@@ -24,7 +24,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    //    회원가입
+//        회원가입
     @GetMapping("/signUp")
     public String signUpForm() {
         return "user/signUp.tiles";
@@ -47,7 +47,8 @@ public class UserController {
         }
     }
 
-    //    로그인
+
+//        로그인
     @GetMapping("/login")
     public String loginForm() {
         return "user/loginForm.tiles";
@@ -98,21 +99,16 @@ public class UserController {
         return u != null && u.getPw().equals(pw);
     }
 
-    //    로그아웃
+
+//      로그아웃
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
         return "/index.tiles";
     }
 
-//    아이디 중복체크
-//    @PostMapping("/check")
-//    @ResponseBody
-//    public String checkId(@RequestBody String email){
-//        System.out.println(email);
-//        return email;
-//    }
 
+//    이메일 중복체크
     @PostMapping(value = "/check")
     @ResponseBody
     public int checkId(@RequestBody String email) throws Exception {
@@ -125,9 +121,16 @@ public class UserController {
         return userService.getNicknameCheck(nickname);
     }
 
-    //아이디찾기
+
+//    이메일 찾기
     @GetMapping("/findUser")
-    public String findId(){
+    public String goFindIdPw(){
         return "user/findIdPw.tiles";
+    }
+
+    @PostMapping(value = "/findEmail")
+    @ResponseBody
+    public String findEmail(User user) throws Exception{
+        return userService.searchEmail(user.getName(), user.getNickname());
     }
 }

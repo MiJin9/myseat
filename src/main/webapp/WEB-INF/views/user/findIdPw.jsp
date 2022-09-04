@@ -30,9 +30,12 @@
             margin-top: 30px;
             text-align: center;
         }
-        #emailBtn{
+        #emailBtn, #loginBtn{
             width: 100%;
             margin-top: 0px;
+            background-color: rgb(89, 117, 196);
+            color: white;
+            font-weight: bold;
         }
         input{
             background-color: white;
@@ -47,28 +50,100 @@
             font-size: 17px;
             padding-bottom: 40px;
         }
+        #email{
+            background-color: white;
+        }
+        #pw{
+            background-color: #edeaea;
+        }
+        #pwA{
+            color: black;
+            background-color: #edeaea;
+        }
+        #emailA{
+            color: black;
+            background-color: white;
+        }
     </style>
 </head>
 <body>
 
-<form action="<c:url value="/user/findUser"/>" method="post">
-    <div>
+<form action="" method="post" id="form">
+    <div style="width: 100%">
         <h4>계정찾기</h4>
         <ul id="findUl">
-            <li class="findLi"><a href="">아이디</a></li>
-            <li class="findLi"><a href="">비밀번호</a></li>
+            <li class="findLi" id="email"><a href="javascript:void(0)" id="emailA">이메일 찾기</a></li>
+            <li class="findLi" id="pw"><a href="javascript:void(0)" id="pwA">비밀번호 찾기</a></li>
         </ul>
-        <div style="padding-top: 40px; padding-bottom: 40px; text-align: center">
-            <p>가입한 계정의 이름과 닉네임을 입력해주세요.</p>
-            <div>
-                <input placeholder="이름">
-                <input placeholder="닉네임">
+        <div id="idPwCommon" style="padding-top: 40px; padding-bottom: 40px; text-align: center">
+            <p id="pText">가입한 계정의 이름과 닉네임을 입력해주세요.</p>
+            <div id="inputLoc">
+                <input placeholder="이름" id="name">
+                <input placeholder="닉네임" id="nickname">
+            </div>
+            <div id="emailResult" style="display: none;">
+                <h5 style="font-size: 15px">요청하신 이메일 찾기 결과입니다.</h5>
+                <div id="emailLoc">
+                    <p id="emailPlace" style="font-size: 15px; padding-bottom: 0; margin-top: 25px;"></p>
+                </div>
             </div>
         </div>
         <div>
-            <button id="emailBtn">이메일 찾기</button>
+            <input type="button" id="emailBtn" value="이메일 찾기">
+            <input type="button" id="loginBtn" style="display: none" value="로그인">
         </div>
     </div>
 </form>
+<script>
+    $("#pwA").on("click", function (){
+        $("#pw").css("background-color", "white");
+        $("#pwA").css("background-color", "white");
+        $("#email").css("background-color", "#edeaea");
+        $("#emailA").css("background-color", "#edeaea");
+    });
+
+    $("#emailA").on("click", function (){
+        $("#pw").css("background-color", "#edeaea");
+        $("#pwA").css("background-color", "#edeaea");
+        $("#email").css("background-color", "white");
+        $("#emailA").css("background-color", "white");
+    });
+
+    $("#emailBtn").on("click", function (){
+        let name = $("#name").val();
+        let nickname = $("#nickname").val();
+        if($("#name").val()==""){
+            alert("이름을 입력해주세요.")
+            return;
+        }
+
+        if($("#nickname").val()==""){
+            alert("닉네임을 입력해주세요.")
+            return;
+        }
+
+        $.ajax({
+            url : "/myseat/user/findEmail",
+            type : "post",
+            data : {"name" : name,
+                    "nickname" : nickname},
+            dataType : 'text',
+            success:function (result){
+                $("#pText").css('display', 'none')
+                $("#inputLoc").css('display', 'none')
+                $("#emailBtn").css('display', 'none')
+                $("#emailResult").css('display', 'block')
+                $("#loginBtn").css('display', 'block')
+                $("#emailPlace").text(result);
+            },
+            error:function(){
+                alert("error : 서버요청실패");
+            }
+        });
+    });
+    $("#loginBtn").on("click", function(){
+        location.href="<c:url value='/user/login'/>";
+    });
+</script>
 </body>
 </html>

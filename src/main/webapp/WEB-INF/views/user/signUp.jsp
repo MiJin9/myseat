@@ -106,7 +106,6 @@
                             $("#emailCheck").text("사용 가능한 이메일입니다.");
                             $("#emailCheck").css("color","green");
                             $('input[id=emailHidden]').attr('value', 1);
-                            // $("#email").attr("readonly",true);
                         }
                     }else{
                         $("#emailCheck").text("이미 사용중이거나 탈퇴한 이메일입니다.");

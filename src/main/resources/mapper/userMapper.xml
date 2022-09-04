@@ -56,4 +56,11 @@
         SET name = #{name}, nickname = #{nickname}
         WHERE email = #{email}
     </update>
+
+    <!--이메일 찾기-->
+    <select id="selectEmail" parameterType="map" resultType="String">
+        SELECT email
+        FROM ms_user
+        WHERE name = #{name} and nickname = #{nickname}
+    </select>
 </mapper>

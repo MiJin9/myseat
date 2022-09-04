@@ -10,13 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/place")
 public class PlaceController {
 
-
     @Value("#{props['mapKey']}")
-    private String key;
+    private String mapKey;
+
+    @Value("#{props['restKey']}")
+    private String restKey;
 
     @GetMapping("/map")
     public String showMap(Model m){
-        m.addAttribute("key", key);
+        m.addAttribute("mapKey", mapKey);
+        m.addAttribute("restKey", restKey);
         return "place/placeMap.tiles";
     }
 }

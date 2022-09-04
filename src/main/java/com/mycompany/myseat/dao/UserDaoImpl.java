@@ -5,6 +5,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Repository
 public class UserDaoImpl implements UserDao {
     @Autowired
@@ -35,5 +38,13 @@ public class UserDaoImpl implements UserDao {
     @Override
     public String getNickName(String email) throws Exception{
         return session.selectOne(namespace+"getNickName", email);
+    }
+
+    @Override
+    public String selectEmail(String name, String nickname) throws Exception{
+        Map map = new HashMap();
+        map.put("name", name);
+        map.put("nickname", nickname);
+        return session.selectOne(namespace+"selectEmail", map);
     }
 }

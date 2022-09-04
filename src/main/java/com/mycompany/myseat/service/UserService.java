@@ -12,4 +12,6 @@ public interface UserService {
     int getNicknameCheck(String nickname) throws Exception;
 
     String getNickName(String email) throws Exception;
+
+    String searchEmail(String name, String nickname) throws Exception;
 }
