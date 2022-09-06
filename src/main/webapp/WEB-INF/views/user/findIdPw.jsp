@@ -30,7 +30,7 @@
             margin-top: 30px;
             text-align: center;
         }
-        #emailBtn, #loginBtn{
+        #emailBtn, #loginBtn, #pwBtn{
             width: 100%;
             margin-top: 0px;
             background-color: rgb(89, 117, 196);
@@ -80,6 +80,7 @@
             <div id="inputLoc">
                 <input placeholder="이름" id="name">
                 <input placeholder="닉네임" id="nickname">
+                <input placeholder="이메일" id="emailInput" style="display: none">
             </div>
             <div id="emailResult" style="display: none;">
                 <h5 style="font-size: 15px">요청하신 이메일 찾기 결과입니다.</h5>
@@ -91,6 +92,7 @@
         <div>
             <input type="button" id="emailBtn" value="이메일 찾기">
             <input type="button" id="loginBtn" style="display: none" value="로그인">
+            <input type="button" id="pwBtn" style="display: none" value="비밀번호 보내기">
         </div>
     </div>
 </form>
@@ -100,6 +102,13 @@
         $("#pwA").css("background-color", "white");
         $("#email").css("background-color", "#edeaea");
         $("#emailA").css("background-color", "#edeaea");
+
+        $("#pText").html("가입한 이메일을 입력해주세요. <br> 이메일 인증을 통해 비밀번호를 변경합니다.");
+        $("#name").css('display', 'none');
+        $("#nickname").css('display', 'none');
+        $("#emailBtn").css('display', 'none');
+        $("#emailInput").css('display', 'inline');
+        $("#pwBtn").css('display', 'block');
     });
 
     $("#emailA").on("click", function (){
@@ -107,6 +116,13 @@
         $("#pwA").css("background-color", "#edeaea");
         $("#email").css("background-color", "white");
         $("#emailA").css("background-color", "white");
+
+        $("#pText").text("가입한 계정의 이름과 닉네임을 입력해주세요.");
+        $("#name").css('display', 'inline');
+        $("#nickname").css('display', 'inline');
+        $("#emailBtn").css('display', 'block');
+        $("#emailInput").css('display', 'none');
+        $("#pwBtn").css('display', 'none');
     });
 
     $("#emailBtn").on("click", function (){
@@ -141,8 +157,32 @@
             }
         });
     });
+
     $("#loginBtn").on("click", function(){
         location.href="<c:url value='/user/login'/>";
+    });
+
+    $("#pwBtn").on("click", function (){
+
+        let email = $("#emailInput").val();
+
+        if(email==""){
+            alert("이메일을 입력해주세요.")
+            return;
+        }
+
+        $.ajax({
+            url : "/myseat/user/sendMail?email="+email,
+            type : "get",
+            dataType : 'text',
+            success:function (){
+                alert("입력한 메일로 임시 비밀번호가 전송되었습니다.");
+            },
+            error:function(){
+                // alert(email);
+                alert("error : 서버요청실패");
+            }
+        });
     });
 </script>
 </body>

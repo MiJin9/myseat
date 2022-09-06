@@ -6,25 +6,32 @@ import com.mycompany.myseat.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.net.http.HttpResponse;
+import java.security.SecureRandom;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
     @Autowired
     UserService userService;
+    @Autowired
+    JavaMailSender mailSender;
 
-//        회원가입
+    //        회원가입
     @GetMapping("/signUp")
     public String signUpForm() {
         return "user/signUp.tiles";
@@ -48,7 +55,7 @@ public class UserController {
     }
 
 
-//        로그인
+    //        로그인
     @GetMapping("/login")
     public String loginForm() {
         return "user/loginForm.tiles";
@@ -100,7 +107,7 @@ public class UserController {
     }
 
 
-//      로그아웃
+    //      로그아웃
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
@@ -108,7 +115,7 @@ public class UserController {
     }
 
 
-//    이메일 중복체크
+    //    이메일 중복체크
     @PostMapping(value = "/check")
     @ResponseBody
     public int checkId(@RequestBody String email) throws Exception {
@@ -122,15 +129,67 @@ public class UserController {
     }
 
 
-//    이메일 찾기
+    //    이메일 찾기
     @GetMapping("/findUser")
-    public String goFindIdPw(){
+    public String goFindIdPw() {
         return "user/findIdPw.tiles";
     }
 
     @PostMapping(value = "/findEmail")
     @ResponseBody
-    public String findEmail(User user) throws Exception{
+    public String findEmail(User user) throws Exception {
         return userService.searchEmail(user.getName(), user.getNickname());
+    }
+
+    //    이메일 보내기
+//    @RequestMapping(value = "/sendMail", method = {RequestMethod.GET, RequestMethod.POST})
+    @GetMapping(value = "/sendMail")
+    @ResponseBody
+    public void sendMail(@RequestParam String email) throws Exception {
+
+        String newPw = getRamdomPassword(10);
+        String subject = "[myseat] 비밀번호 초기화";
+        String content = "임시 비밀번호는 ["+newPw+"] 입니다.";
+        String from = "myseat_@naver.com";
+        String to = email;
+
+        try {
+            MimeMessage mail = mailSender.createMimeMessage();
+            MimeMessageHelper mailHelper = new MimeMessageHelper(mail,"UTF-8");
+
+            mailHelper.setFrom(from);
+            mailHelper.setTo(to);
+            mailHelper.setSubject(subject);
+            mailHelper.setText(content);
+
+            mailSender.send(mail);
+            userService.updatePw(email, newPw);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+//    임시 비밀번호 만들기
+    public String getRamdomPassword(int size) {
+        char[] charSet = new char[] {
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+                '!', '@', '#', '$', '%', '^', '&' };
+
+        StringBuffer sb = new StringBuffer();
+        SecureRandom sr = new SecureRandom();
+        sr.setSeed(new Date().getTime());
+
+        int idx = 0;
+        int len = charSet.length;
+        for (int i=0; i<size; i++) {
+            // idx = (int) (len * Math.random());
+            idx = sr.nextInt(len);    // 강력한 난수를 발생시키기 위해 SecureRandom을 사용한다.
+            sb.append(charSet[idx]);
+        }
+
+        return sb.toString();
     }
 }

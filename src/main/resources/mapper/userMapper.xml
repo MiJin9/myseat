@@ -63,4 +63,11 @@
         FROM ms_user
         WHERE name = #{name} and nickname = #{nickname}
     </select>
+
+    <!--비밀번호 재설정-->
+    <update id="updatePw" parameterType="map">
+        UPDATE ms_user
+        SET pw = #{pw}
+        WHERE email = #{email}
+    </update>
 </mapper>

@@ -15,4 +15,6 @@ public interface UserDao {
     String getNickName(String email) throws Exception;
 
     String selectEmail(String name, String nickname) throws Exception;
+
+    int updatePw(String email, String pw) throws Exception;
 }

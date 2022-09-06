@@ -39,4 +39,9 @@ public class UserServiceImpl implements UserService {
     public String searchEmail(String name, String nickname) throws Exception{
         return userDao.selectEmail(name, nickname);
     }
+
+    @Override
+    public int updatePw(String email, String pw) throws Exception{
+        return userDao.updatePw(email, pw);
+    }
 }

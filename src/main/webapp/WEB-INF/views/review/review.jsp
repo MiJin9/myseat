@@ -99,7 +99,6 @@
         <div style="border-top: 1px solid #ddd; margin-top: 15px">
             <div>
                 <textarea id="commentWrite"></textarea>
-<%--                <input class="btn" id="sendBtn" type="button" value="작성">--%>
                     <button id="sendBtn" class="btn" type="button">작성</button>
             </div>
             <div id="commentList"></div>

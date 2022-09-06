@@ -47,4 +47,12 @@ public class UserDaoImpl implements UserDao {
         map.put("nickname", nickname);
         return session.selectOne(namespace+"selectEmail", map);
     }
+
+    @Override
+    public int updatePw(String email, String pw) throws Exception{
+        Map map = new HashMap();
+        map.put("email", email);
+        map.put("pw", pw);
+        return session.update(namespace+"updatePw", map);
+    }
 }
